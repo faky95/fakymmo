@@ -1,0 +1,58 @@
+{% extends "::base1.html.twig" %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{asset('css/datatable.min.css')}}">
+{% endblock %}
+
+{% block main %}
+<h1 style="text-align:center;">Reservation En Cours </h1>
+
+<table id="table">
+<tr>
+{# <th>Id</th> #}
+<th>Nom Client</th>
+ <th>Adresse Client</th>
+<th>Nom Bien</th>
+<th>Localite Bien</th>
+<th>Type Bien</th>
+<th>Prix Location</th>
+ <th>Image</th>
+<th>Details</th>  
+</tr>
+{% for reservation in reservations %}
+<tr>
+    {# <td>{{reservation.id}}</td> #}
+    <td>{{reservation.client}}</td>
+    <td>{{reservation.client.adresse}}</td>
+    <td>{{reservation.bien.nombien}}</td>
+    <td>{{reservation.bien.localite}}</td>
+    <td>{{reservation.bien.typebien}}</td>
+    <td>{{reservation.bien.prixlocation}}</td>
+    <td>   
+        {% for image in reservation.bien.images %}
+                        
+             <img src="{{asset('images/'~image.image)}}"class="img">
+                       
+         {% endfor %}</td>
+    <td>
+        <a href="{{path('detail',{'id':reservation.id})}}">Details </a>
+    </td>
+ 
+
+</tr>
+{% endfor %}
+</table>
+<style>
+.img
+{
+    width:100px;
+}
+</style>
+{% block javascripts %}
+{{ parent() }}
+
+<script src="{{asset('js/datatable.min.js')}}"></script>
+<script src="{{asset('js/monscript.js')}}"></script>
+{% endblock %}
+{% endblock %}

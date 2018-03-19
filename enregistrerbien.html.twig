@@ -1,0 +1,97 @@
+{# {% extends "::baseee.html.twig" %} #}
+{# {% block main %} #}
+<h1>Enregistrer Votre Bien</h1>
+{{form(form)}}
+{# {% for bienencours in bienencours %}
+<a href="{{path('registbien', {'id':bien.id})}}"><h1>RETOUR</h1></a>
+{% endfor %} #}
+{# {% block javascript %}
+{{ parent() }}
+<script>
+        $(function(){
+
+        })
+
+        function loadLocalite(){
+            $.ajax({
+
+                url: "{{path("ajaxLocalite")}}",
+                type: "POST",
+                dataType: "json",
+
+                success: function(data) {
+                    $("#sellocalite").html('<option value="">Choisir localité</option>');
+                    $.each(data, function(key, value){
+                        var op = $("<option value='"+value.id+"'></option>").text(value.nom);
+                        $("#sellocalite").append(op);
+                    })
+                },
+
+                error: function(res, stat, error) {
+                    console.log(error);
+                }
+            })
+        }
+
+        function loadType(){
+            $.ajax({
+
+                url: "{{path("ajaxType")}}",
+                type: "POST",
+                dataType: "json",
+
+                success: function(data) {
+                    $("#seltype").html('<option value="">Choisir le type</option>');
+                    $.each(data, function(key, value){
+                        var op = $("<option value='"+value.id+"'></option>").text(value.nom);
+                        $("#seltype").append(op);
+                    })
+                },
+
+                error: function(res, stat, error) {
+                    console.log(error);
+                }
+            })
+        }
+        
+        loadLocalite();
+        loadType();
+
+        $(".ajout").hide();
+
+        $("#addLocalite").on("click", function(){
+            $(".ajout").hide();
+            $("#formLocalite").show();
+        })
+        $("#addType").on("click", function(){
+            $(".ajout").hide();
+            $("#formType").show();
+        })
+
+        $(".formAdd").on("submit", function(e){
+            e.preventDefault();
+
+            $.ajax({
+
+                url: "{{path("ajaxAddSelect")}}",
+                type: "POST",
+                data: $(this).serialize(),
+                dataType: "text",
+
+                success: function(data) {
+                    $(".libelle").val('')
+                    $(".ajout").hide();
+                    console.log(data)
+                    loadLocalite();
+                    loadType();
+                },
+
+                error: function(res, stat, error) {
+                    console.log(error);
+                }
+            })
+            
+        })
+        </script>
+        {% endblock %} #}
+{# {% endblock %} #}

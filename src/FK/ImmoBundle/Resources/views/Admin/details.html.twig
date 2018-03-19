@@ -1,0 +1,67 @@
+{% extends "::base1.html.twig" %}
+
+{% block title %}Détail-location{% endblock %}
+{% block main %}
+
+
+  <h4 style="font-family:Goudy Old style; color:black;"><center><i> Information Client</i></center></h4>
+  </div>
+  
+  <div class="card-body">
+  
+
+    <i><p class="card-text" style="font-family:Goudy Old style; color:grey;"> Nom du Client : {{ details.Client.nomcomplet }}  </p></i><br>
+    <i><p class="card-text" style="font-family:Goudy Old style; color:grey;"> Numero piece  : {{ details.Client.numeropiece }}</p></i><br>
+    <i><p class="card-text" style="font-family:Goudy Old style; color:grey;"> Adresse   : {{details.Client.adresse }} </p></i><br>
+    <i><p class="card-text" style="font-family:Goudy Old style; color:grey;"> Telephone  :{{details.Client.phone }} </p></i><br>
+    <i><p class="card-text" style="font-family:Goudy Old style; color:grey;">Login:{{details.Client.login}}</p></i><br>
+    <i><p class="card-text" style="font-family:Goudy Old style; color:grey;">Email :{{ details.Client.email}}</p></i><br>
+  </div>
+
+   
+  
+  
+ 
+  
+  
+  </div>
+ <div class="col-lg-6">
+<div class="card" style=" height:400px;">
+  <div class="card-header" style="background:lightgrey;opacity:0.5">
+  <h4 style="font-family:Goudy Old style; color:black;"><center><i>  Information Bien</i></center></h4>
+  </div>
+  <div class="card-body">
+    
+    <i><p class="card-text" style="font-family:Goudy Old style; color:grey;">Nom du Bien : {{ details.Bien.nombien }}</p></i><br>
+    <i><p class="card-text" style="font-family:Goudy Old style; color:grey;">Type de Bien : {{ details.Bien.typebien.nomtype }}</p></i><br>
+    <i><p class="card-text" style="font-family:Goudy Old style; color:grey;">Localite : {{details.Bien.Localite.nomlocal }}</p></i><br>
+    <i><p class="card-text" style="font-family:Goudy Old style; color:grey;">Description : {{ details.Bien.description}}</p></i><br>
+    <i><p class="card-text" style="font-family:Goudy Old style; color:grey;">Prix-Location :{{details.Bien.prixlocation}}</p></i><br>
+  </div>
+  
+</div>
+
+
+</div>
+</div>
+<div class="row" style="margin-bottom:20px;">
+  {% for image in details.bien.images %}
+                        
+             <img src="{{asset('images/'~image.image)}}"class="img">
+                       
+         {% endfor %}
+
+
+
+<div class="row" style="margin-bottom:30px;">
+<div class="col-lg-4" ></div>
+<div class="col-lg-2" >
+<a href="{{path('viewReserve')}}">
+<input type="submit" value="Retour" class="btn btn-primary" style="width:150px;">
+</a>
+<a href="{{path('contrat',{'id':details.id})}}"> 
+<input type="submit" value="Valider" class="btn btn-primary" style="width:150px;"></div>
+</a>
+</div>
+</div> 
+{% endblock %}

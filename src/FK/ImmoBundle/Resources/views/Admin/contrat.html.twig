@@ -1,0 +1,87 @@
+{% extends "::base1.html.twig" %}
+
+{# {% block title %}Détail-Contrat{% endblock %} #}
+{% block main %}
+<h1 style="text-align:center;text-decoration:underline;">  Contrat </h1>
+
+    <div class="card">
+        
+        <div class="card-body">
+            <h2 class="card-title" style="text-align:center;text-decoration:underline;">Informations locataire </h2>
+            <div class="card-text">
+                <h3> CNI : {{reservations.client.numeropiece}} </h3>
+                <h3> Nom : {{reservations.client.nomcomplet}} </h3>
+                <h3> Login : {{reservations.client.login}}</h3>
+                <h3> Email : {{reservations.client.email}}</h3>
+                <h3> Telephone : {{reservations.client.phone}}</h3>
+                </br>
+                <h2 class="card-title" style="text-align:center;text-decoration:underline;">Informations Bien </h2>
+                <h3> Bien : {{reservations.bien.nombien}} </h3>
+                <h3> Description : {{reservations.bien.description}} </h3>
+                <h3> Prix : {{reservations.bien.prixlocation}}</h3>
+                <h3> Localite : {{reservations.bien.localite}}</h3>
+                </br>
+            <form method="POST" action="{{path('pdf',{'id':reservations.id})}}">
+        <h3>   Caution </h3> <input type="number" name="caution" value="{{ reservations.Bien.prixlocation}}"><br>
+        <h3>   Mensualite </h3> <input type="number" name="mensualite" value="{{ reservations.Bien.prixlocation}}"><br>
+        <h3>  Total  </h3> <input type="number" name="total" value="{{ reservations.Bien.prixlocation * 2}}"><br>
+        <h3> Terme du Contrat </h3>
+            {% for text in texte %}
+            <textarea>{{text.texte}}</textarea><br>
+            {% endfor %}
+            <strong>
+            <input type="checkbox" name="duree"> contrat d'une durée d'un an
+            </strong><br>
+            <strong>Accepter </strong>: <input type="radio" name="ra" id="oui" >
+        <strong> Refuser </strng>: <input type="radio" name="ra" id="non"><br>
+
+            <input class="btn btn-info" type="submit" name="submit" value="Enregistrer" id="enregister" >
+            </form>
+       
+            </div>
+           
+        </div>
+    </div>
+
+  
+
+
+
+
+{% block stylesheets %}
+{{ parent() }}
+<style>
+.card
+{
+   
+   width:500px;
+   margin-left:500px;
+   margin-top:20px;
+  
+   box-shadow:10px 10px 10px ;
+ 
+}
+
+</style>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+$(document).ready(function()
+{
+    
+  $('input:submit').prop("disabled" , true);
+  $('#oui').on('click',function()
+  {
+       $('input:submit').prop("disabled" , false);
+  });
+  $('#non').on('click',function()
+  {
+      $('input:submit').prop("disabled" , true);
+  });
+});
+</script>
+{% endblock %}
+
+{% endblock %}

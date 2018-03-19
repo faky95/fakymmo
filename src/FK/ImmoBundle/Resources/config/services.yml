@@ -1,0 +1,4 @@
+services:
+#    fk_immo.example:
+#        class: FK\ImmoBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

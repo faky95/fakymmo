@@ -1,0 +1,16 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% block style %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+
+{% endblock %}
+
+<div class="container">
+<h1 class="text-center">Page d'Insciption</h1>
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'form-control'}}) }}
+    {{ form_widget(form) }}
+    <div>
+        <input  class="btn btn-sm btn-warning" type="submit" value="S'inscrir"/>
+    </div>
+{{ form_end(form) }}
+</div>

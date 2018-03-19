@@ -1,0 +1,126 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+{{ parent ()}}
+<style>
+.search
+{
+	width:700px;
+	background-color:white;
+	margin-top:50px;
+	margin-left:190px;
+	height:90px;
+	box-shadow:10px 10px 10px ;
+}
+.btn
+{
+	
+	background-image:url('../fonts/cherche.png');
+	height:90px;
+	width:100px;
+	margin-left:50px;
+
+	
+}
+{# .img
+{
+	width:200%;
+} #}
+</style>
+{% endblock %}
+ {% block main %} 
+	<div class="Main-agile">
+		<!-- banner -->
+		<div id="home" class="w3ls-banner"> 
+			<!-- banner-text -->
+			<div class="w3layouts-banner-top">
+				<div class="container">
+					<div class="agileits-banner-info">
+						<span>Finding Your House is Much </span>
+						<div class="rw-words rw-words-1">
+							<span>Easier now!</span>
+							<span>Best Estate</span>
+							<span>Happiness</span>
+							<span>Wonder</span>
+						</div>
+							<div class="search">
+								 <div class="agileits_w3layouts_more menu__item">
+							<form method="post"action="">
+								<div class="row">
+									<div class="col-lg-3">
+									<h5 style="margin-top:10px;">Type de biens</h5>
+									<select name="type" style="margin-top:10px;">
+										<option value="">  </option> 
+											{% for type in types %}
+									
+											<option value="{{type.id}}" > {{type.nomtype}} </option>
+											{% endfor %}
+									</select> 
+									</div>
+										<div class="col-lg-3">
+										<h5 style="margin-top:10px;">Localite</h5>
+									<select name="localite" style="margin-top:10px;">
+										<option value="">  </option> 
+											{% for localite in localites %}
+									
+											<option value="{{localite.id}}" > {{localite.nomlocal}} </option>
+											{% endfor %}
+									</select> 
+									</div>
+									<div class="col-lg-3">
+									<h5 style="margin-top:10px;">Budget</h5>
+									<input type="number" name="prixlocation" style="margin-top:10px;">
+									</div>
+									<div class="col-lg-3">
+									<input type="submit" name="search" value="" class="btn">
+									
+									{# <img type="submit" col-md-3 col-sm-3 col-xs-6 w3gallery-gridssrc="{{asset('fonts/cherche.png')}}" class="btn" name="search"> #}
+									
+									</div>
+								</div>
+								
+							</form> 
+							{# <a href="#" class="menu__link" data-toggle="modal" data-target="#myModal">Learn More</a> #}
+						 </div>
+							</div>
+						  
+					</div>	
+				</div>
+			</div>			
+		</div>
+	<div class="clearfix"> </div>
+	<!-- //banner-text -->
+</div>	
+
+{% endblock %}
+{% block aside %}
+<div class="container"> 
+		<h3 class="w3l-title">Our Gallery</h3>
+	</div>
+<div id="gallery" class="gallery" style="display:flex;"> 
+	
+	{% for bien in biens %}
+	<div class="agileinfo-gallery-row" >
+		{# <div class="col-md-3 col-sm-3 col-xs-6 w3gallery-grids"> #}
+			{% for image in bien.images %}
+			
+			
+			<a href="{{asset('images/'~image.image)}}" class="imghvr-hinge-right figure">
+				<img src="{{asset('images/'~image.image)}}" alt="" title="{{bien.typebien}}"/> 
+				<div class="agile-figcaption" style="margin-top:-20px;">
+				  
+				  <p>{{bien.nombien}} <br> {{bien.localite}} <br> {{bien.prixlocation}}FCFA</p>
+				</div>
+			</a> 
+			 <a href="{{path('reserver', {'id':bien.id})}}"><button><span class="violet">RESERVER</span></button></a>
+
+			
+			
+			{% endfor %}
+		{# </div> #}
+		<div class="clearfix"> </div>
+	</div> 
+	{% endfor %}
+</div> 
+
+{% endblock %}

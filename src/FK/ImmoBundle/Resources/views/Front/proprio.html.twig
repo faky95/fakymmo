@@ -1,0 +1,102 @@
+{% extends "::base1.html.twig" %}
+ {% block stylesheets %}
+  {{ parent() }} 
+    <link href="{{asset('assets/plugins/dropzone/dist/dropzone.css')}}" rel="stylesheet" type="text/css">
+
+ {% endblock %}
+
+{% block aside %}
+<div class="container">
+<div class="row">
+    <form class="col-md-6" method="POST">
+
+    <div class="col-md-6" >
+        <div class="form-group">
+            <label for="exampleInputEmail1">Numero Piece</label>
+            <input type="number" class="form-control"  name="numpiece" required="required">
+            
+        </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nom Complet</label>
+            <input type="text" class="form-control" placeholder="ENTER YOUR NAME" name="nomComplet" >
+        
+        </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" placeholder="ENTER YOUR MAIL" name="email">
+             
+        </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Login</label>
+            <input type="text" class="form-control" placeholder="ENTER YOUR USERNAME"name="login">
+          
+        </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Password</label>
+            <input type="password" class="form-control" placeholder="ENTER YOUR PASSWORD" name="password">
+            
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Phone</label>
+            <input type="number" class="form-control" placeholder="ENTER YOUR PHONE" name="phone">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Code Banque</label>
+            <input type="number" class="form-control" name="codebanque">
+        </div>
+        </div>
+        <div class="col-md-6 " style="position:relative;left:300px;">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Nom Bien</label>
+            <input type="text" class="form-control"  name="nombien" required="required">
+            
+        </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Montant Voulu</label>
+            <input type="text" class="form-control" placeholder="ENTER YOUR NAME" name="montantProprio">
+        
+        </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Type Bien</label>
+                <select name="typebien">
+                    <option value=""></option>
+                    {% for type in types %}
+                        <option value="{{ type.id}}">{{type.nomtype}}</option>
+                    {% endfor %}
+             </select>             
+        </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Localite</label>
+                <select name="localite">
+                    <option value=""></option>
+                    {% for local in locals %}
+                        <option value="{{ local.id}}">{{local.nomlocal}}</option>
+                    {% endfor %}
+                </select>          
+        </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Description</label>
+          <textarea class="form-control" id="description" name="description" type="text"></textarea>           
+         </div>
+      
+   
+        <input type="submit" class="btn btn-primary" value="ENREGISTRER" name="save" id="save">
+    </form>
+</div>
+</div>
+  {% endblock %} 
+
+
+ {% block javascripts %}
+    <script src="{{asset('assets/plugins/dropzone/dist/dropzone.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function()
+    {
+        $('#save').on('click',function()
+        {
+            alert('Proposition prise en compte!!! Merci');
+        });
+    });
+    </script>
+ {% endblock %}

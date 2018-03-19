@@ -1,0 +1,127 @@
+
+{% extends "::layout.html.twig" %}
+
+{% block stylesheet %}
+{{ parent() }}
+<!-- DataTables -->
+        <link href="{{ asset('assets/plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/plugins/datatables/buttons.bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/plugins/datatables/fixedHeader.bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/plugins/datatables/scroller.bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+
+
+<link rel="shortcut icon" href="assets/images/favicon_1.ico">
+
+ {% endblock %}
+
+
+{% block contenu %}
+<div class="container">
+<h1 style="text-align:center;margin-top:10px;"> Voici la liste des Biens </h1>
+<a href="{{path('addbien')}}">Ajouter Bien </a>
+<div class="col-12 ">
+
+{# <h1 class="titre"><u> liste des biens</u></h1> #}
+
+<table class="table" id="datatable" >
+<thead>
+<tr>
+<th>nom</th>
+<th>prix</th>
+<th>description</th>
+<th>localite</th>
+<th>type</th>
+<th>Image</th>
+</tr>
+</thead>
+{% for bien in biens %}
+<tbody>
+<tr>
+
+<td>{{bien.nombien}}</td>
+<td>{{bien.prixlocation }}</td>
+<td>{{bien.description}}</td>
+<td>{{bien.localite}}</td>
+<td>{{bien.typebien}}</td>
+ <td>
+    
+ {% for image in bien.images %}
+   <img src="{{asset('images/'~image.image)}}"class="img">
+
+{% endfor %}
+
+ </td> 
+ {# <td>
+ <a href="{{path('reserver')}}">RESERVER</a>
+ </td> #}
+  <style>
+ .img
+ {
+     width:100px;
+ }
+ #datatable{
+     position:relative;
+     left:300px;
+     width:1000px;
+ }
+ .titre{
+    text-align:center;
+ }
+ .container{
+     position:relative;
+     top:100px;
+ }
+ </style>
+
+
+</tr>
+
+
+{%endfor%}
+</tbody>
+</table>
+</div>
+
+</div>
+{% block javascripts %}
+{{ parent() }}
+ <!-- Datatables-->
+ 
+         <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap.js')}}"></script>
+        <script src="{{ asset('assets/plugins/datatables/dataTables.buttons.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/datatables/buttons.bootstrap.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/datatables/jszip.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/datatables/pdfmake.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/datatables/vfs_fonts.js')}}"></script>
+        <script src="{{ asset('assets/plugins/datatables/buttons.html5.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/datatables/buttons.print.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/datatables/dataTables.fixedHeader.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/datatables/dataTables.keyTable.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/datatables/dataTables.responsive.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/datatables/responsive.bootstrap.min.js')}}"></script>
+        <script src="{{ asset('assets/plugins/datatables/dataTables.scroller.min.js')}}"></script>
+
+        <!-- Datatable init js -->
+        <script src="{{ asset('assets/pages/datatables.init.js')}}"></script>
+
+        {# <script src="{{ asset('assets/js/jquery.app.js')}}"></script> #}
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#datatable').dataTable();
+                $('#datatable-keytable').DataTable( { keys: true } );
+                $('#datatable-responsive').DataTable();
+                $('#datatable-scroller').DataTable( { ajax: "{{ asset('assets/plugins/datatables/json/scroller-demo.json')}}", deferRender: true, scrollY: 380, scrollCollapse: true, scroller: true } );
+                var table = $('#datatable-fixed-header').DataTable( { fixedHeader: true } );
+            } );
+            TableManageButtons.init();
+        </script>
+     {# <script type="text/javascript" src="{{ asset('jsakimo/akimo.js')}}"></script> #}
+{% endblock %}
+
+{% endblock %}
+
+

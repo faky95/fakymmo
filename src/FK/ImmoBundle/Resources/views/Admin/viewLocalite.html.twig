@@ -1,0 +1,85 @@
+
+{% extends "::layout.html.twig" %}
+
+{% block stylesheet %}
+{{ parent() }}
+
+<link rel="shortcut icon" href="assets/images/favicon_1.ico">
+
+ {% endblock %}
+
+
+{% block contenu %}
+<div class="container">
+<div class="col-12 ">
+
+<table class="table" id="table_id" >
+<thead>
+<tr>
+<th>Id</th>
+<th>nom</th>
+</tr>
+
+</thead>
+{% for em in localite %}
+<tbody>
+<tr>
+
+<td>{{em.id}}</td>
+<td>{{em.nomlocal}}</td>
+
+</tr>
+
+
+{%  endfor %}
+<style>
+ 
+ #table_id{
+     position:relative;
+     left:300px;
+     top:200px;
+     width:800px;
+ }
+ </style>
+</tbody>
+</table>
+</div>
+
+</div>
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<script type="text/javascript">
+   $(document).ready(function(){
+       $('#table_id').DataTable( {
+           "language":{
+                        "sProcessing":     "Traitement en cours...",
+                        "sSearch":         "Rechercher&nbsp;:",
+                        "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+                        "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                        "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                        "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                        "sInfoPostFix":    "",
+                        "sLoadingRecords": "Chargement en cours...",
+                        "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                        "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
+                        "oPaginate": {
+                            "sFirst":      "Premier",
+                            "sPrevious":   "Pr&eacute;c&eacute;dent",
+                            "sNext":       "Suivant",
+                            "sLast":       "Dernier"
+                        },
+                        "oAria": {
+                            "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                            "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                        }
+                    }
+       });
+   })
+   </script>
+     <script type="text/javascript" src="{{ asset('jsakimo/akimo.js') }}"></script>
+{% endblock %}
+
+{% endblock %}
+
+

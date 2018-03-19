@@ -1,0 +1,18 @@
+# fk_immo:
+#     resource: "@FKImmoBundle/Resources/config/routing.yml"
+#     prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+fk_immo:
+    resource: '@FKImmoBundle/Controller/'
+    type: annotation
+
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /admin
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

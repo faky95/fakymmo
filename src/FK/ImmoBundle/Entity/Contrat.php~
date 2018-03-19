@@ -1,0 +1,238 @@
+<?php
+
+namespace FK\ImmoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Contrat
+ *
+ * @ORM\Table(name="contrat")
+ * @ORM\Entity(repositoryClass="FK\ImmoBundle\Repository\ContratRepository")
+ */
+class Contrat
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_contrat", type="datetime")
+     */
+    private $dateContrat;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="caution", type="integer")
+     */
+    private $caution;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="duree", type="string", length=25)
+     */
+    private $duree;
+
+    /**
+   * @ORM\OneToMany(targetEntity = "FK\ImmoBundle\Entity\Paiement", mappedBy = "contrat")
+   */
+  private $paiements;
+
+    /**
+   * @ORM\ManyToOne(targetEntity="FK\ImmoBundle\Entity\Client", inversedBy="contrats")
+   * @ORM\JoinColumn(name = "idclient", referencedColumnName = "id")
+   */
+  private $client;
+
+    /**
+   * @ORM\ManyToOne(targetEntity="FK\ImmoBundle\Entity\Bien" , inversedBy="contrats")
+   * @ORM\JoinColumn(name = "idbien", referencedColumnName = "id")
+   */
+  private $bien;
+      /**
+   * @ORM\ManyToOne(targetEntity="FK\ImmoBundle\Entity\Proprietaire", inversedBy="contrats")
+   * @ORM\JoinColumn(name = "idproprietaire", referencedColumnName = "id")
+   */
+  private $proprietaire;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set dateContrat
+     *
+     * @param \DateTime $dateContrat
+     *
+     * @return Contrat
+     */
+    public function setDateContrat($dateContrat)
+    {
+        $this->dateContrat = $dateContrat;
+
+        return $this;
+    }
+
+    /**
+     * Get dateContrat
+     *
+     * @return \DateTime
+     */
+    public function getDateContrat()
+    {
+        return $this->dateContrat;
+    }
+
+    /**
+     * Set caution
+     *
+     * @param integer $caution
+     *
+     * @return Contrat
+     */
+    public function setCaution($caution)
+    {
+        $this->caution = $caution;
+
+        return $this;
+    }
+
+    /**
+     * Get caution
+     *
+     * @return int
+     */
+    public function getCaution()
+    {
+        return $this->caution;
+    }
+
+    /**
+     * Set duree
+     *
+     * @param string $duree
+     *
+     * @return Contrat
+     */
+    public function setDuree($duree)
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    /**
+     * Get duree
+     *
+     * @return string
+     */
+    public function getDuree()
+    {
+        return $this->duree;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->paiements = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add paiement
+     *
+     * @param \FK\ImmoBundle\Entity\Paiement $paiement
+     *
+     * @return Contrat
+     */
+    public function addPaiement(\FK\ImmoBundle\Entity\Paiement $paiement)
+    {
+        $this->paiements[] = $paiement;
+
+        return $this;
+    }
+
+    /**
+     * Remove paiement
+     *
+     * @param \FK\ImmoBundle\Entity\Paiement $paiement
+     */
+    public function removePaiement(\FK\ImmoBundle\Entity\Paiement $paiement)
+    {
+        $this->paiements->removeElement($paiement);
+    }
+
+    /**
+     * Get paiements
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPaiements()
+    {
+        return $this->paiements;
+    }
+
+    /**
+     * Set client
+     *
+     * @param \FK\ImmoBundle\Entity\Client $client
+     *
+     * @return Contrat
+     */
+    public function setClient(\FK\ImmoBundle\Entity\Client $client = null)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return \FK\ImmoBundle\Entity\Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * Set bien
+     *
+     * @param \FK\ImmoBundle\Entity\Bien $bien
+     *
+     * @return Contrat
+     */
+    public function setBien(\FK\ImmoBundle\Entity\Bien $bien = null)
+    {
+        $this->bien = $bien;
+
+        return $this;
+    }
+
+    /**
+     * Get bien
+     *
+     * @return \FK\ImmoBundle\Entity\Bien
+     */
+    public function getBien()
+    {
+        return $this->bien;
+    }
+}
